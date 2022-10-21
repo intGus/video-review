@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Document</title>
+</head>
+<style>
+  .ytp-pause-overlay{
+  display:none;
+  }
+</style>
+<body>
+  <iframe id="iframe"
+        width="640" height="360"
+        src="https://www.youtube-nocookie.com/embed/Al_HXSoQ7JI?enablejsapi=1"
+        frameborder="0"
+        style="border: solid 4px #37474F"></iframe>
+  <div id="log"></div>
+  <input type="text" id="comment">
+  <button id="save">save</button>
+  
+  <script type="text/javascript">
+    var tag = document.createElement('script');
+    tag.id = 'iframe-video';
+    tag.src = 'https://www.youtube.com/iframe_api';
+    var firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+    var player;
+    function onYouTubeIframeAPIReady() {
+      console.log('calling youtubeiframe')
+      player = new YT.Player('iframe', {
+          events: {
+            'onReady': onPlayerReady,
+            'onStateChange': onPlayerStateChange
+          }
+      });
+    }
+    function onPlayerReady(event) {
+      
+    }
+    function onPlayerStateChange(event) {
+    ;
+    }
+    logDiv = document.getElementById("log")
+    text = document.getElementById("comment")
+    text.addEventListener('click', function() {
+      player.pauseVideo()
+      })
+    
+    button = document.getElementById("save")
+    button.addEventListener('click', function() {
+      var timestamp = player.getCurrentTime()
+      let logged = document.createElement("div")
+      logged.setAttribute("id", timestamp)
+      logged.textContent = `${comment.value} at ${timestamp}`
+      logDiv.appendChild(logged)
+      comment.value = ''
+    })
+
+    logDiv.addEventListener('click', function(e){
+      timecode = e.target.id
+      player.seekTo(timecode)
+    })
+  </script>
+</body>
+</html>

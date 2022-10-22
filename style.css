@@ -9,3 +9,17 @@ div {
 extracolor {
   background-color: rgb(49, 62, 80);
 }
+
+span {
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-weight:900;
+  background-color: rgb(49, 62, 80);
+  border-radius: 50%;
+  width: 1.2em;
+  text-align: center;
+  font-size: xx-large;
+  color: white;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+}

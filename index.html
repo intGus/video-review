@@ -1,28 +1,100 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
+  <!--<link rel="stylesheet" href="style.css">-->
+  <link rel="stylesheet" href="style2.css">
   <script src="script.js" defer></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <title>Document</title>
 </head>
-<style>
-  .ytp-pause-overlay{
-  display:none;
-  }
-</style>
+
 <body>
-  <iframe id="iframe"
-        width="640" height="360"
-        src="https://www.youtube-nocookie.com/embed/Al_HXSoQ7JI?enablejsapi=1"
-        frameborder="0"
-        style="border: solid 4px #37474F"></iframe>
-  <div id="log"></div>
-  <input type="text" id="comment">
-  <button id="save">save</button>
-  
-  <span>?</span>
+  <main>
+    <nav class="main-nav-bar">
+      <div>
+        <button>
+          <i class="fa-solid fa-chevron-left"></i>
+        </button>
+        back
+      </div>
+      <div>
+        1/1
+      </div>
+      <button>
+        <i class="fa-regular fa-circle"></i>
+      </button>
+    </nav>
+    <div class="video-container">
+      <div class="video">
+        <iframe id="iframe" src="https://www.youtube-nocookie.com/embed/Al_HXSoQ7JI?enablejsapi=1" frameborder="0">
+        </iframe>
+      </div>
+    </div>
+    <div class="comment-container">
+      <ul id="log">
+        <li data-timecode="1" class="comment-item">
+          <div class="comment-header">
+            <img class="mr-2" src="https://ui-avatars.com/api/?background=0D8ABC&color=fff&rounded=true" alt="">
+            <span class="mr-2">
+              John Doe
+            </span>
+            <time datetime="2008-02-14 20:00">
+              3d
+            </time>
+          </div>
+          <p>
+            <span>
+              00:00
+            </span>
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsam molestias labore maxime neque esse culpa blanditiis quasi doloribus ducimus nihil unde ipsa aliquid placeat distinctio consectetur nam laboriosam, in praesentium.
+          </p>
+        </li>
+        <li data-timecode="1" class="comment-item">
+          <div class="comment-header">
+            <img class="mr-2" src="https://ui-avatars.com/api/?background=0D8ABC&color=fff&rounded=true" alt="">
+            <span class="mr-2">
+              John Doe
+            </span>
+            <time datetime="2008-02-14 20:00">
+              3d
+            </time>
+          </div>
+          <p>
+            <span>
+              00:00
+            </span>
+            comentario generico
+          </p>
+        </li>
+        <li data-timecode="1" class="comment-item">
+          <div class="comment-header">
+            <img class="mr-2" src="https://ui-avatars.com/api/?background=0D8ABC&color=fff&rounded=true" alt="">
+            <span class="mr-2">
+              John Doe
+            </span>
+            <time datetime="2008-02-14 20:00">
+              3d
+            </time>
+          </div>
+          <p>
+            <span>
+              00:00
+            </span>
+            comentario generico
+          </p>
+        </li>
+      </ul>
+      <div class="input-container">
+        <input type="text" id="comment">
+        <button id="save">save</button>
+      </div>
+    </div>
+    <span>?</span>
+  </main>
 </body>
+
 </html>

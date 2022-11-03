@@ -38,7 +38,7 @@
       <ul id="log">
         <li data-timecode="1" class="comment-item">
           <div class="comment-header">
-            <img class="mr-2" src="https://ui-avatars.com/api/?background=0D8ABC&color=fff&rounded=true" alt="">
+            <img class="avatar mr-2" src="https://ui-avatars.com/api/?background=0D8ABC&color=fff&rounded=true" alt="">
             <span class="mr-2">
               John Doe
             </span>
@@ -55,7 +55,7 @@
         </li>
         <li data-timecode="1" class="comment-item">
           <div class="comment-header">
-            <img class="mr-2" src="https://ui-avatars.com/api/?background=0D8ABC&color=fff&rounded=true" alt="">
+            <img class="avatar mr-2" src="https://ui-avatars.com/api/?background=0D8ABC&color=fff&rounded=true" alt="">
             <span class="mr-2">
               John Doe
             </span>
@@ -72,7 +72,7 @@
         </li>
         <li data-timecode="1" class="comment-item">
           <div class="comment-header">
-            <img class="mr-2" src="https://ui-avatars.com/api/?background=0D8ABC&color=fff&rounded=true" alt="">
+            <img class="avatar mr-2" src="https://ui-avatars.com/api/?background=0D8ABC&color=fff&rounded=true" alt="">
             <span class="mr-2">
               John Doe
             </span>
@@ -89,8 +89,15 @@
         </li>
       </ul>
       <div class="input-container">
-        <input type="text" id="comment">
-        <button id="save">save</button>
+        <div class="top-container">
+          <img class="avatar mr-3" src="https://ui-avatars.com/api/?background=0D8ABC&color=fff&rounded=true" alt="">
+          <input type="text" id="comment" placeholder="Leave a comment here">
+        </div>
+        <div class="lower-container">
+          <span id="timecode">--:--</span>
+          <button id="save">save</button>
+        </div>
+        
       </div>
     </div>
     <span>?</span>

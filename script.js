@@ -20,22 +20,47 @@ function onPlayerReady(event) {
 function onPlayerStateChange(event) {
 ;
 }
-logDiv = document.getElementById("log")
+logList = document.getElementById("log")
 text = document.getElementById("comment")
 text.addEventListener('click', function() {
   player.pauseVideo()
+  let timecode = player.getCurrentTime()
+  timecode = (timecode.toFixed(2) + "").padStart(5, "0");
+  document.getElementById("timecode").textContent = timecode;
   })
 
 button = document.getElementById("save")
 button.addEventListener('click', function() {
-  var timestamp = player.getCurrentTime()
-  let logged = document.createElement("div")
-  logged.setAttribute("id", timestamp)
-  logged.textContent = `${comment.value} at ${timestamp}`
-  logDiv.appendChild(logged)
+  let timecode = player.getCurrentTime()
+  timecode = (timecode.toFixed(2) + "").padStart(5, "0");
+  
+  const li = document.createElement("li")
+  li.dataset.timecode = timecode;
+  li.classList.add('comment-item');
+  
+  const commentHeader = document.createElement("div")
+  commentHeader.classList.add('comment-header')
+  const userImg = document.createElement("img")
+  userImg.classList.add('avatar', 'mr-2')
+  userImg.src = "https://ui-avatars.com/api/?background=0D8ABC&color=fff&rounded=true"
+  const userSpan = document.createElement('span')
+  userSpan.textContent = 'John Doe';
+  userSpan.classList.add('mr-2');
+  const dateSpan = document.createElement('span')
+  dateSpan.textContent = '3d'; //datetime now
+  commentHeader.appendChild(userImg);
+  commentHeader.appendChild(userSpan);
+  commentHeader.appendChild(dateSpan);
+  li.appendChild(commentHeader);
+
+  const pComment = document.createElement('p');
+  pComment.innerHTML = `<span>${timecode}</span> ${comment.value}`
+  logList.appendChild(li)
+  li.appendChild(pComment);
   comment.value = ''
+  document.getElementById("timecode").textContent = '--:--'
 })
-logDiv.addEventListener('click', function(e){
-  timecode = e.target.id
-  player.seekTo(timecode)
+logList.addEventListener('click', function(e){
+  let timecode = e.target.closest("[data-timecode]").dataset.timecode;
+  player.seekTo(timecode);
 })

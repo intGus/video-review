@@ -25,7 +25,9 @@ main {
 
 /* Video */
 .video-container{
-  padding-bottom: 20px;
+  padding-bottom: 2px;
+  position: sticky;
+  top: 0;
 }
 
 .video-container .video {
@@ -65,36 +67,50 @@ main {
 .comment-item .comment-header {
   display: flex;
   align-items: center;
-  
+  margin-bottom: 4px;
 }
 
-.comment-item img {
+img.avatar {
   height: 24px;
 }
 
 .input-container {
+  color: rgb(241, 243, 246);
   position: fixed;
+  flex-direction: column;
+  display: flex;
+  justify-content: center;
   left: 5px;
   right: 5px;
   bottom: 5px;
+  background-color: rgb(43, 47, 59);
+  border-radius: 5px;
+  height: 70px;
+  align-items: center;
+  box-shadow: rgb(0 0 0 / 70%) 0px -10px 30px 0px;
+}
+
+.input-container .top-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 4px;
+  width: 98%;
+}
+
+.input-container .lower-container{
+  display: flex;
+  justify-content: space-between;
+  margin-left: 35px;
+  width: 88%;
 }
 
 .input-container input {
+  color: white;
   width: 100%;
+  background-color:rgba(0, 0, 0, 0);
+  border: none;
+  outline:none;
 }
-
-div {
-
-}
-
-extracolor {
-
-}
-
-span {
-
-}
-
 
 
 /* Utility classes */
@@ -102,8 +118,9 @@ span {
   margin-right: 5px;
 }
 
-
-
+.mr-3{
+  margin-right: 10px;
+}
 
 
 

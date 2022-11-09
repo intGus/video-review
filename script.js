@@ -21,8 +21,10 @@ function onPlayerStateChange(event) {
 ;
 }
 
+const logList = document.getElementById("log")
+
 function addComment(user, timestamp, timecode, comment) {
-  const logList = document.getElementById("log")
+  
   const li = document.createElement("li")
   li.dataset.timecode = timecode;
   li.classList.add('comment-item');
@@ -42,16 +44,13 @@ function addComment(user, timestamp, timecode, comment) {
   li.appendChild(commentHeader);
 
   const pComment = document.createElement('p');
-  pComment.innerHTML = `<span>${timecode}</span> ${comment.value}`
+  pComment.innerHTML = `<span>${timecode}</span> ${comment}`
   logList.appendChild(li)
   li.appendChild(pComment);
-  
-  
-
 }
 
-text = document.getElementById("comment")
-text.addEventListener('click', function() {
+comment = document.getElementById("comment")
+comment.addEventListener('click', function() {
   player.pauseVideo()
   let timecode = player.getCurrentTime()
   timecode = (timecode.toFixed(2) + "").padStart(5, "0");
@@ -60,10 +59,11 @@ text.addEventListener('click', function() {
 
 button = document.getElementById("save")
 button.addEventListener('click', function() {
-  let timecode = player.getCurrentTime()
+  let timecode = player.getCurrentTime();
   timecode = (timecode.toFixed(2) + "").padStart(5, "0");
-  let timestamp = '3d'
-  let 
+  let timestamp = '2d';
+  user = 'Gustavo Diaz';
+  addComment(user, timestamp, timecode, comment.value);
 
   document.getElementById("timecode").textContent = '--:--'
   comment.value = ''

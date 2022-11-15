@@ -78,6 +78,10 @@ img.avatar {
   height: 24px;
 }
 
+#userAvatar {
+  cursor: pointer;
+}
+
 .input-container {
   left: 5px;
   right: 5px;

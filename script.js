@@ -16,11 +16,39 @@ fetch("http://192.168.1.100:3000/backend/comments")
   })
 })
 
+
+let user = "";
+userAvatar = document.getElementById("userAvatar")
+
+if (localStorage.getItem('user')) {
+  user = localStorage.getItem('user');
+}
+
+updateAvatar(user, userAvatar);
+
+userAvatar.addEventListener('click', function () {
+  updateUser('Enter new username')
+})
+
+function updateUser(msg){
+  const newUser = prompt(msg, user);
+  if (!newUser) {
+    return;
+  }
+  updateAvatar(newUser, userAvatar)
+  user = newUser
+  return true;
+}
+
+function updateAvatar(user, imgContainer) {
+  localStorage.setItem('user', user);
+  imgContainer.src =  "https://ui-avatars.com/api/?background=0D8ABC&color=fff&rounded=true&name=" + encodeURIComponent(user);
+}
+
 var firstScriptTag = document.getElementsByTagName('script')[0];
 firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 var player;
 function onYouTubeIframeAPIReady() {
-  console.log('calling youtubeiframe')
   player = new YT.Player('iframe', {
       events: {
         'onReady': onPlayerReady,
@@ -70,11 +98,23 @@ comment.addEventListener('click', function() {
   })
 
 button = document.getElementById("save")
+
+comment.addEventListener("input", function(){
+  button.disabled = !this.value;
+})
+
+
+
 button.addEventListener('click', function() {
+  if (!user){
+    if (updateUser('Provide a username before leaving a comment') === undefined) {
+      return;
+    }
+  }
+    
   let timecode = player.getCurrentTime();
   timecode = (timecode.toFixed(2) + "").padStart(5, "0"); //create function
   let timestamp = '2d';
-  user = 'Andres David';
   const commentDB = {user, timestamp, timecode, comment: comment.value}
   fetch("http://192.168.1.100:3000/backend/comments", {
     method: "POST",
@@ -88,6 +128,7 @@ button.addEventListener('click', function() {
 
   document.getElementById("timecode").textContent = '--:--'
   comment.value = ''
+  button.disabled = true
 })
 
 logList.addEventListener('click', function(e){

@@ -74,6 +74,10 @@ body {
   margin-bottom: 4px;
 }
 
+.comment-item .trashcan {
+  text-align: end;
+}
+
 img.avatar {
   height: 24px;
 }
@@ -124,6 +128,35 @@ img.avatar {
   outline:none;
 }
 
+.modal-container {
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.424);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  visibility: visible;
+  opacity: 1;
+  transition: visibility 0.1s, opacity 0.1s linear;
+}
+
+.modal-container.hidden{
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0.1s, opacity 0.1s linear;
+}
+
+.modal-container .modal {
+  background-color:rgb(27, 34, 44);
+  color: rgb(241, 243, 246);
+  padding: 30px;
+  border-radius: 2px;
+  z-index: 9;
+}
+
+.modal-container .modal-overlay {
+  position: absolute;
+}
+
 
 /* Utility classes */
 .mr-2{
@@ -134,6 +167,12 @@ img.avatar {
   margin-right: 10px;
 }
 
+.wrap-parent {
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
 
 
 /* Media queries */

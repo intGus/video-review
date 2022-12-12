@@ -3,11 +3,17 @@ var tag = document.createElement('script');
 tag.id = 'iframe-video';
 tag.src = 'https://www.youtube.com/iframe_api';
 
-fetch("http://192.168.1.100:3000/backend/comments")
+const queryString = window.location.search;
+const urlParams = new URLSearchParams(queryString);
+const videoId = urlParams.get('v')
+
+
+fetch("/node/backend/comments/" + videoId)
 .then(res => res.json())
 .then(data => {
   data.forEach(item => {
     addComment(
+      item._id,
       item.user,
       item.timestamp,
       item.timecode, 
@@ -48,9 +54,15 @@ function updateAvatar(user, imgContainer) {
 var firstScriptTag = document.getElementsByTagName('script')[0];
 firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 var player;
+
 function onYouTubeIframeAPIReady() {
   player = new YT.Player('iframe', {
-    videoId: 'M7lc1UVf-VE',
+    videoId: videoId,
+    host: 'https://www.youtube-nocookie.com',
+    playerVars: {
+      'enablejsapi': 1,
+      'origin': window.location.host
+    },
     events: {
       'onReady': onPlayerReady,
       'onStateChange': onPlayerStateChange
@@ -66,7 +78,7 @@ function onPlayerStateChange(event) {
 
 const logList = document.getElementById("log")
 
-function addComment(user, timestamp, timecode, comment) {
+function addComment(_id, user, timestamp, timecode, comment) {
   const li = document.createElement("li")
   li.dataset.timecode = timecode;
   li.classList.add('comment-item');
@@ -86,8 +98,19 @@ function addComment(user, timestamp, timecode, comment) {
   li.appendChild(commentHeader);
   const pComment = document.createElement('p');
   pComment.innerHTML = `<span>${timecode}</span> ${comment}`
+  const trashcan = document.createElement("div")
+  trashcan.classList.add('trashcan')
+  const trashcanIcon = document.createElement("i")
+  trashcanIcon.classList.add("fa-regular")
+  trashcanIcon.classList.add("fa-trash-can")
+  trashcan.appendChild(trashcanIcon)
+  li.setAttribute("id", _id)
+  // trashcan.addEventListener("click", function() {
+  //   alert(_id)
+  // })
   logList.appendChild(li)
   li.appendChild(pComment);
+  li.appendChild(trashcan)
 }
 
 comment = document.getElementById("comment")
@@ -116,16 +139,16 @@ button.addEventListener('click', function() {
   let timecode = player.getCurrentTime();
   timecode = (timecode.toFixed(2) + "").padStart(5, "0"); //create function
   let timestamp = '2d';
-  const commentDB = {user, timestamp, timecode, comment: comment.value}
-  fetch("http://192.168.1.100:3000/backend/comments", {
+  const commentDB = {user, timestamp, timecode, comment: comment.value, videoId: "Al_HXSoQ7JI"} //videoId from URL
+  fetch("/node/backend/comments", {
     method: "POST",
     headers: {
       "Content-Type": 'application/json',
     },
     body: JSON.stringify(commentDB)
   })
-  .then(res => console.log(res.json()))
-  addComment(user, timestamp, timecode, comment.value);
+  .then(res => res.json())
+  .then(data => addComment(data._id, data.user, data.timestamp, data.timecode, data.comment));
 
   document.getElementById("timecode").textContent = '--:--'
   comment.value = ''
@@ -133,6 +156,27 @@ button.addEventListener('click', function() {
 })
 
 logList.addEventListener('click', function(e){
+  if (e.target.nodeName === "I"){
+    const commentId = e.target.parentNode.parentNode.id
+    fetch(("/node/backend/comments/" + commentId), {
+      method: "DELETE"
+    })
+    .then( function(res) {
+      if (res.ok){
+        e.target.parentNode.parentNode.remove()
+      }
+      console.log(res)
+    })
+    // console.log(e.target.parentNode.parentNode.id)
+  } else {
   let timecode = e.target.closest("[data-timecode]").dataset.timecode;
   player.seekTo(timecode);
+  }
+})
+
+modalContainer = document.getElementById('modal-container');
+modalOverlay = document.getElementById('modal-overlay');
+modalOverlay.addEventListener('click', function(){
+  modalContainer.classList.add('hidden')
+  // modalContainer.remove()
 })

@@ -33,8 +33,9 @@
     <div class="video-container">
       <div class="video-box">
         <div class="video">
-          <iframe id="iframe" src="https://www.youtube-nocookie.com/embed/Al_HXSoQ7JI?enablejsapi=1" frameborder="0">
-          </iframe>
+          <!-- <iframe id="iframe" src="https://www.youtube-nocookie.com/embed/?enablejsapi=1" frameborder="0">
+          </iframe> -->
+          <div id="iframe"></div>
         </div>
       </div>
       <div class="input-container">
@@ -104,10 +105,15 @@
             </span>
             comentario generico
           </p>
+          <div class="trashcan"><i class="fa-regular fa-trash-can"></i></div>
         </li>
       </ul>
     </div>
     <!-- <span>?</span> -->
+    <div class="modal-container wrap-parent" id="modal-container">
+      <div class="modal" id="modal">Hello World</div>
+      <div class="modal-overlay wrap-parent" id="modal-overlay"></div>
+    </div>
   </main>
 </body>
 
